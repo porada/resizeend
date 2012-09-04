@@ -1,16 +1,16 @@
-# Custom `resizeend` event
+# `window.onresizeend`
 
 Best of both worlds: `window.onresize` and `window.onorientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
 
-The event is fired in two cases:
+The `resizeend` callback is invoked in two cases:
 
 1. **When a browser window has finished resizing.**
 
-    It’s the cure for those `window.onresize` skips that occur every pixel when you resize your browser’s window. `performance++` for sure.
+    It’s the cure for those `window.onresize` skips that occur every pixel as long as you keep resizing your browser’s window. Details matter. `performance++`, too.
 
 2. **When changing the device orientation has resized the viewport.**
 
-    Unless the shape of your screen is a square, switching from portrait mode into landscape (and vice versa) triggers `resizeend`. If rotating a device upside down doesn’t alter its viewport dimensions, the event isn’t dispatched, because there’s simply no need to.
+    Unless the shape of your screen is a square, switching from portrait mode into landscape (and vice versa) triggers `window.onresizeend`. If rotating a device upside down doesn’t alter its viewport dimensions, the callback isn’t invoked, because there’s simply no need to.
 
 Super useful in the [Responsive Web Design](http://en.wikipedia.org/wiki/Responsive_Web_Design) era we’re living and developing in.
 
@@ -19,31 +19,44 @@ Did I mention *it’s tiny*? [**Go through the source code.**](https://github.co
 ## Usage
 
 ```javascript
-if ( window.addEventListener ) {
-  window.addEventListener("resizeend", callback, false);
-}
-// Falls back to `resize` for IE 8 and below
-else {
-  window.attachEvent("onresize", callback);
+window.onresizeend = function() {
+  // callback
+};
+```
+
+Should your need multiple `resizeend` listeners:
+
+```javascript
+window.addResizeEndListener = function(callback) {
+  if ( typeof this.onresizeend === "function" ) {
+    var currentCallback = this.onresizeend;
+
+    this.onresizeend = function() {
+      currentCallback();
+      callback();
+    };
+  }
+  else {
+    this.onresizeend = callback;
+  }
 }
 
-function callback(event) {
-  console.log(event.type);
-}
+window.addResizeEndListener(callback1);
+window.addResizeEndListener(callback2);
+//                                  …
+window.addResizeEndListener(callbackN);
 ```
 
 ## Browser support
-
-Tested in the following browsers:
 
 * Safari 5.1+,
 * Chrome 20+,
 * Firefox 14+,
 * Opera 11+,
-* Internet Explorer 9 (and 8 for the fallback),
-* Mobile Safari on iOS 5 (simulator) and iOS 5.1 (device).
+* Internet Explorer **7+**,
+* Mobile Safari on iOS 5+.
 
-Please let me know if you test `resizeend.js` elsewhere. *(IE 10, anyone?)*
+I haven’t tested `resizeend.js` in IE 10 yet, but I think it’s safe to assume the script will do just fine in that browser.
 
 ## Feedback
 

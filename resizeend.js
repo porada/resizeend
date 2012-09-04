@@ -6,15 +6,11 @@
 ;(function(window) {
   "use strict";
 
-  // No `resizeend` for IE 8 or below (see the example usage below)
-  if ( !window.addEventListener || !window.dispatchEvent ) {
-    return;
-  }
-
-  var dispatchresizeEndEvent = function() {
-    var resizeEndEvent = document.createEvent("Event");
-    resizeEndEvent.initEvent("resizeend", false, false);
-    window.dispatchEvent(resizeEndEvent);
+  // Quite loosely named function
+  var dispatchResizeEndEvent = function() {
+    if ( typeof window.onresizeend === "function" ) {
+      window.onresizeend();
+    }
   };
 
   // Assuming `window.orientation` is all about degrees
@@ -24,23 +20,30 @@
   };
 
   var initialOrientation = getCurrentOrientation();
+  var currentOrientation;
   var resizeTimeout;
 
-  window.addEventListener("resize", function() {
-    var currentOrientation = getCurrentOrientation();
+  var resizeDebounce = function() {
+    currentOrientation = getCurrentOrientation();
 
     // If `window` is resized due to an orientation change,
-    // fire the `resizeend` event immediately; otherwise,
-    // slightly delay the dispatch of `resizeend`
+    // invoke `onresizeend` immediately; otherwise, slightly delay it
     if ( currentOrientation !== initialOrientation ) {
-      dispatchresizeEndEvent();
+      dispatchResizeEndEvent();
       initialOrientation = currentOrientation;
     }
     else {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(dispatchresizeEndEvent, 100);
+      resizeTimeout = setTimeout(dispatchResizeEndEvent, 100);
     }
-  }, false);
+  };
+
+  if ( window.addEventListener ) {
+    window.addEventListener("resize", resizeDebounce, false);
+  }
+  else if ( window.attachEvent ) {
+    window.attachEvent("onresize", resizeDebounce);
+  }
 
 })(window);
 
@@ -48,13 +51,6 @@
 /* Example usage
 ----------------------------------------------------------------------------- */
 
-//  if ( window.addEventListener ) {
-//    window.addEventListener("resizeend", callback, false);
-//  }
-//  else {
-//    window.attachEvent("onresize", callback);
-//  }
-//
-//  function callback(event) {
+//  window.onresizeend = function(event) {
 //    console.log(event.type);
 //  }
