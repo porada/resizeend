@@ -8,11 +8,11 @@
   </head>
   <body>
     <div class="block header">
-      <h1><code>resizeend</code> event&nbsp;demo</h1>
+      <h1><code>window.onresizeend</code> demo</h1>
       <p>Resize your browser window or&nbsp;rotate your device to&nbsp;see <a href="https://github.com/porada/resizeend/blob/master/resizeend.js"><code>resizeend.js</code></a> in&nbsp;action. Created by&nbsp;<a href="http://twitter.com/porada" title="Dominik Porada">@porada</a>.</p>
     </div>
     <div class="block log" id="log">
-      <p class="start">The <code>resizeend</code> event hasn’t been fired yet.</p>
+      <p class="start"><code>onresizeend</code> hasn’t been triggered yet…</p>
     </div>
     <script src="https://raw.github.com/porada/resizeend/master/resizeend.js"></script>
     <script>
@@ -20,14 +20,7 @@
 /*  Demo
 -------------------------------------------------------------------------------- */
 
-if ( window.addEventListener ) {
-  window.addEventListener("resizeend", callback, false);
-}
-else {
-  window.attachEvent("onresize", callback);
-}
-
-function callback(event) {
+window.onresizeend = function() {
   var log = document.getElementById("log");
 
   if ( log.nodeType === 1 ) {
@@ -35,10 +28,10 @@ function callback(event) {
       return ( number < 10 ) ? "0" + number : "" + number;
     };
 
-    entry  = "<p>The most recent <code>" + event.type + "</code> event ";
-    entry += "was fired at&nbsp;<b>" + pad(date.getUTCHours()) + ":";
+    entry  = "<p><code>onresizeend</code> was triggered ";
+    entry += "at&nbsp;<b>" + pad(date.getUTCHours()) + ":";
     entry += pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds()) + ".";
-    entry += pad(Math.floor(date.getUTCMilliseconds() / 10)) + "</b>.</p>";
+    entry += pad(Math.floor(date.getUTCMilliseconds() / 10)) + "</b></p>";
 
     // Excuse my `innerHTML`
     log.innerHTML = entry;
