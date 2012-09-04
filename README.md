@@ -49,6 +49,8 @@ window.addResizeEndListener(callbackN);
 
 ## Browser support
 
+Tested in the following browsers:
+
 * Safari 5.1+,
 * Chrome 20+,
 * Firefox 14+,
