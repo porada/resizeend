@@ -14,6 +14,8 @@ The event is fired in two cases:
 
 Super useful in the [Responsive Web Design](http://en.wikipedia.org/wiki/Responsive_Web_Design) era we’re living and developing in.
 
+Did I mention *it’s tiny*? [**Go through the source code.**](https://github.com/porada/resizeend/blob/master/resizeend.js)
+
 ## Usage
 
 ```javascript
