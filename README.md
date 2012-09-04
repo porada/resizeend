@@ -1,6 +1,6 @@
 # Custom `resizeend` event
 
-Best of both worlds: `window.onresize` and `window.onorientationchange`.
+Best of both worlds: `window.onresize` and `window.onorientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
 
 The event is fired in two cases:
 
