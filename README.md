@@ -36,14 +36,14 @@ function callback(event) {
 
 Tested in the following browsers:
 
-* Safari 6,
-* Chrome 21+,
+* Safari 5.1+,
+* Chrome 20+,
 * Firefox 14+,
-* Opera 12,
+* Opera 11+,
 * Internet Explorer 9 (and 8 for the fallback),
 * Mobile Safari on iOS 5 (simulator) and iOS 5.1 (device).
 
-Since the script does work properly in IE 9, I don’t worry about the not-so-recent versions of any modern browser. Please let me know if you check `resizeend.js` elsewhere. *(IE 10, anyone?)*
+Please let me know if you test `resizeend.js` elsewhere. *(IE 10, anyone?)*
 
 ## Feedback
 
