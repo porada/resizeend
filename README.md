@@ -16,7 +16,7 @@ Super useful in the [Responsive Web Design](http://en.wikipedia.org/wiki/Respons
 
 Did I mention *it’s tiny*? [**Go through the source code.**](https://github.com/porada/resizeend/blob/master/resizeend.js)
 
-## Usage
+## Example usage
 
 ```javascript
 window.onresizeend = function() {
@@ -39,7 +39,7 @@ window.addResizeEndListener = function(callback) {
   else {
     this.onresizeend = callback;
   }
-}
+};
 
 window.addResizeEndListener(callback1);
 window.addResizeEndListener(callback2);
