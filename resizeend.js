@@ -1,6 +1,6 @@
 
 /* resizeend.js © 2012 Dominik Porada
- * This script may be freely distributed under the MIT license.
+ * Distributed under the MIT license: http://porada.mit-license.org
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••• */
 
 ;(function(window) {
