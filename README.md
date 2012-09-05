@@ -24,10 +24,26 @@ window.onresizeend = function() {
 };
 ```
 
-Should your need multiple `resizeend` listeners:
+If you don’t support IE 8 anymore, just use:
+
+```javascript
+window.addEventListener("resizeend", function() {
+  // callback
+}, false);
+```
+
+### Multiple `resizeend` listeners
+
+Should you ever need multiple `resizeend` listeners that work in IE 8 and below:
 
 ```javascript
 window.addResizeEndListener = function(callback) {
+  if ( this.addEventListener ) {
+    this.addEventListener("resizeend", callback, false);
+
+    return;
+  }
+
   if ( typeof this.onresizeend === "function" ) {
     var currentCallback = this.onresizeend;
 

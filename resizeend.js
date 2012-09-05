@@ -3,13 +3,19 @@
  * Distributed under the MIT license: http://porada.mit-license.org
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••• */
 
-;(function(window) {
+;(function(window, document) {
   "use strict";
 
-  // Quite loosely named function
+  // If the callback is present, invoke it;
+  // otherwise, try to dispatch an actual event
   var dispatchResizeEndEvent = function() {
     if ( typeof window.onresizeend === "function" ) {
       window.onresizeend();
+    }
+    else if ( document.createEvent && window.dispatchEvent ) {
+      var event = document.createEvent("Event");
+      event.initEvent("resizeend", false, false);
+      window.dispatchEvent(event);
     }
   };
 
@@ -45,7 +51,7 @@
     window.attachEvent("onresize", resizeDebounce);
   }
 
-})(window);
+})(window, document);
 
 
 /* Example usage
