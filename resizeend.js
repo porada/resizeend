@@ -52,11 +52,3 @@
   }
 
 })(window, document);
-
-
-/* Example usage
------------------------------------------------------------------------------ */
-
-//  window.onresizeend = function(event) {
-//    console.log(event.type);
-//  }
