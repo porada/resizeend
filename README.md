@@ -1,4 +1,4 @@
-# `window.onresizeend`
+# `resizeend.js`
 
 Best of both worlds: `window.onresize` and `window.onorientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
 
