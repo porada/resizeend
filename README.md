@@ -40,11 +40,8 @@ Should you ever need multiple `resizeend` listeners that work in IE 8 and below:
 window.addResizeEndListener = function(callback) {
   if ( this.addEventListener ) {
     this.addEventListener("resizeend", callback, false);
-
-    return;
   }
-
-  if ( typeof this.onresizeend === "function" ) {
+  else if ( typeof this.onresizeend === "function" ) {
     var currentCallback = this.onresizeend;
 
     this.onresizeend = function() {
