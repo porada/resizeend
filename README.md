@@ -2,7 +2,7 @@
 
 Best of both worlds: `window.onresize` and `window.onorientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
 
-The `resizeend` callback is invoked in two cases:
+The `window.onresizeend` callback is invoked in two cases:
 
 1. **When a browser window has finished resizing.**
 
