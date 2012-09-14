@@ -51,6 +51,7 @@ h1 {
 
 .log p {
     padding: 0.8em 1em;
+    margin-bottom: 0.5em;
     border: 1px solid #e6e6af;
     border-radius: 3px;
     background: #fdfdde;
