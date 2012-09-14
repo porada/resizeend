@@ -64,14 +64,12 @@ window.addResizeEndListener(callbackN);
 
 Tested in the following browsers:
 
-* Safari 5.1+,
-* Chrome 20+,
-* Firefox 14+,
-* Opera 11+,
-* Internet Explorer **7+**,
-* Mobile Safari on iOS 5+.
-
-I haven’t tested `resizeend.js` in IE 10 yet, but I think it’s safe to assume the script will do just fine in that browser.
+* Safari 5.1+
+* Chrome 20+
+* Firefox 14+
+* Opera 11+
+* Internet Explorer 7+
+* Mobile Safari on iOS 5+
 
 ## Feedback
 
