@@ -90,8 +90,6 @@ window.addEventListener("resizestart", function() {
 // and so on…
 ```
 
-The `resize` event in Opera is designed to work like ideal `resizeend`. It’s dispatched exactly when the browser has finished resizing and this is also when `resizestart` is sent, right *before* `resizeend`.
-
 ## Browser support
 
 Tested in the following browsers:
