@@ -90,6 +90,8 @@ window.addEventListener("resizestart", function() {
 // and so on…
 ```
 
+If you don’t need `resizestart` support, you should use the [`resizeend`-only version](https://github.com/porada/resizeend/tree/resizeend-only).
+
 ## Browser support
 
 Tested in the following browsers:
