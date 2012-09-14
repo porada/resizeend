@@ -3,18 +3,20 @@
  * Distributed under the MIT license: http://porada.mit-license.org
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••• */
 
-;(function(window, document) {
+;(function(window, document, resizeEnd, resizeStart) {
   "use strict";
 
-  // If the callback is present, invoke it;
-  // otherwise, try to dispatch an actual event
-  var dispatchResizeEndEvent = function() {
-    if ( typeof window.onresizeend === "function" ) {
-      window.onresizeend();
+  var dispatchCustomEvent = function(eventType) {
+    var possibleEventCallback = window["on" + eventType];
+
+    // If the callback is present, invoke it;
+    // otherwise, dispatch an actual event (if that’s possible)
+    if ( typeof possibleEventCallback === "function" ) {
+      possibleEventCallback();
     }
     else if ( document.createEvent && window.dispatchEvent ) {
       var event = document.createEvent("Event");
-      event.initEvent("resizeend", false, false);
+      event.initEvent(eventType, false, false);
       window.dispatchEvent(event);
     }
   };
@@ -27,20 +29,30 @@
 
   var initialOrientation = getCurrentOrientation();
   var currentOrientation;
-  var resizeTimeout;
+  var resizeDebounceInit;
+  var resizeDebounceTimeout;
 
   var resizeDebounce = function() {
+    if ( !resizeDebounceInit ) {
+      dispatchCustomEvent(resizeStart);
+      resizeDebounceInit = true;
+    }
+
     currentOrientation = getCurrentOrientation();
 
     // If `window` is resized due to an orientation change,
-    // invoke `onresizeend` immediately; otherwise, slightly delay it
+    // dispatch `resizeend` immediately; otherwise, slightly delay it
     if ( currentOrientation !== initialOrientation ) {
-      dispatchResizeEndEvent();
+      dispatchCustomEvent(resizeEnd);
       initialOrientation = currentOrientation;
+      resizeDebounceInit = false;
     }
     else {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(dispatchResizeEndEvent, 100);
+      clearTimeout(resizeDebounce);
+      resizeDebounce = setTimeout(function() {
+        dispatchCustomEvent(resizeEnd);
+        resizeDebounceInit = false;
+      }, 100);
     }
   };
 
@@ -51,4 +63,4 @@
     window.attachEvent("onresize", resizeDebounce);
   }
 
-})(window, document);
+})(window, document, "resizeend", "resizestart");

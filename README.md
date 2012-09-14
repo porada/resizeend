@@ -60,6 +60,38 @@ window.addResizeEndListener(callback2);
 window.addResizeEndListener(callbackN);
 ```
 
+## What about `resizestart`?
+
+The script also invokes `window.onresizestart` callback when the viewport has just started resizing.
+
+If the very resizing has any noticeable impact on performance, e.g. due to presence of many `box-shadow`s or alpha PNGs, I recommend using this technique:
+
+```javascript
+window.onresizestart = function() {
+  // Use the class name defined in your CSS
+  element.className = "hidden";
+};
+
+window.onresizeend = function() {
+  yourResizeEndCallback();
+
+  // Remove the class this way or another
+  element.className = "";
+};
+```
+
+Naturally, if you don’t support IE 8, use:
+
+```javascript
+window.addEventListener("resizestart", function() {
+  element.className = "hidden";
+}, false);
+
+// and so on…
+```
+
+The `resize` event in Opera is designed to work like ideal `resizeend`. It’s dispatched exactly when the browser has finished resizing and this is also when `resizestart` is sent, right *before* `resizeend`.
+
 ## Browser support
 
 Tested in the following browsers:
