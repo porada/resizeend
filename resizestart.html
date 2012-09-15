@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>resizeend</title>
+    <title>resizestart &amp; resizeend</title>
     <link rel="stylesheet" href="demo.css">
   </head>
   <body>
     <div class="block header">
-      <h1><code>resizeend</code> demo</h1>
+      <h1><code>resizestart</code> and&nbsp;<code>resizeend</code> demo</h1>
       <p>Resize your browser window or&nbsp;rotate your device to&nbsp;see <a href="https://github.com/porada/resizeend/blob/master/resizeend.js"><code>resizeend.js</code></a> in&nbsp;action. Created by&nbsp;<a href="http://twitter.com/porada" title="Dominik Porada">@porada</a>.</p>
     </div>
     <div class="block log">
+      <p class="start" id="resizestart"><code>resizestart</code> hasn’t been triggered yet…</p>
       <p class="start" id="resizeend"><code>resizeend</code> hasn’t been triggered yet…</p>
     </div>
     <script src="resizeend.min.js"></script>
@@ -20,13 +21,16 @@
 /*  Demo
 -------------------------------------------------------------------------------- */
 
-window.onresizeend = function() {
-  var log = document.getElementById("resizeend");
+window.onresizestart = function() { callback("resizestart"); };
+window.onresizeend   = function() { callback("resizeend");   };
+
+function callback(type) {
+  var log = document.getElementById(type);
 
   if ( log && log.nodeType === 1 ) {
     var entry, date = new Date();
 
-    entry  = "<code>resizeend</code> was triggered ";
+    entry  = "<code>" + type + "</code> was triggered ";
     entry += "at&nbsp;<b>" + pad(date.getUTCHours()) + ":";
     entry += pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds()) + ".";
     entry += pad(Math.floor(date.getUTCMilliseconds() / 10)) + "</b>";
@@ -34,7 +38,7 @@ window.onresizeend = function() {
     log.className = "";
     log.innerHTML = entry;
   }
-};
+}
 
 function pad(number) {
   return ( number < 10 ) ? "0" + number : "" + number;
