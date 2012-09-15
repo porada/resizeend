@@ -62,7 +62,7 @@ window.addResizeEndListener(callbackN);
 
 ## What about `resizestart`?
 
-The script also invokes `window.onresizestart` callback when the viewport has just started resizing.
+`resizestart.js` supports both `window.onresizestart` **and** `window.onresizeend`. The `resizestart` callback is invoked when the viewport has just started resizing, and `resizeend` works as explained earlier.
 
 If the very resizing has any noticeable impact on performance, e.g. due to presence of many `box-shadow`s or alpha PNGs, I recommend using this technique:
 
@@ -90,7 +90,7 @@ window.addEventListener("resizestart", function() {
 // and so on…
 ```
 
-If you don’t need `resizestart` support, you should use the [`resizeend`-only version](https://github.com/porada/resizeend/tree/resizeend-only).
+If you don’t need `resizestart` support, you should use `resizeend.js`.
 
 ## Browser support
 
