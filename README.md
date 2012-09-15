@@ -62,7 +62,7 @@ window.addResizeEndListener(callbackN);
 
 ## What about `resizestart`?
 
-`resizestart.js` supports both `window.onresizestart` **and** `window.onresizeend`. The `resizestart` callback is invoked when the viewport has just started resizing, and `resizeend` works as explained earlier.
+`resizestart.js` supports both `window.onresizestart` **and** `window.onresizeend`. The `resizestart` callback is invoked when the viewport has just started resizing, and `resizeend` works as explained earlier. [**See the `resizestart` demo.**](http://porada.github.com/resizeend/resizestart.html)
 
 If the very resizing has any noticeable impact on performance, e.g. due to presence of many `box-shadow`s or alpha PNGs, I recommend using this technique:
 
