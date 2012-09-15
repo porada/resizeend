@@ -48,8 +48,8 @@
       resizeDebounceInit = false;
     }
     else {
-      clearTimeout(resizeDebounce);
-      resizeDebounce = setTimeout(function() {
+      clearTimeout(resizeDebounceTimeout);
+      resizeDebounceTimeout = setTimeout(function() {
         dispatchCustomEvent(resizeEnd);
         resizeDebounceInit = false;
       }, 100);
