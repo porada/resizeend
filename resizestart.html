@@ -21,16 +21,16 @@
 /*  Demo
 -------------------------------------------------------------------------------- */
 
-window.onresizestart = function() { callback("resizestart"); };
-window.onresizeend   = function() { callback("resizeend");   };
+window.addEventListener("resizestart", callback, false);
+window.addEventListener("resizeend", callback, false);
 
-function callback(type) {
-  var log = document.getElementById(type);
+function callback(event) {
+  var log = document.getElementById(event.type);
 
   if ( log && log.nodeType === 1 ) {
     var entry, date = new Date();
 
-    entry  = "<code>" + type + "</code> was triggered ";
+    entry  = "<code>" + event.type + "</code> was triggered ";
     entry += "at&nbsp;<b>" + pad(date.getUTCHours()) + ":";
     entry += pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds()) + ".";
     entry += pad(Math.floor(date.getUTCMilliseconds() / 10)) + "</b>";
