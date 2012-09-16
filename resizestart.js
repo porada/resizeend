@@ -6,19 +6,14 @@
 ;(function(window, document, resizeEnd, resizeStart) {
   "use strict";
 
-  var dispatchCustomEvent = function(eventType) {
-    var possibleEventCallback = window["on" + eventType];
+  if ( !(window.addEventListener && document.createEvent && window.dispatchEvent) ) {
+    return;
+  }
 
-    // If the callback is present, invoke it;
-    // otherwise, dispatch an actual event (if that’s possible)
-    if ( typeof possibleEventCallback === "function" ) {
-      possibleEventCallback();
-    }
-    else if ( document.createEvent && window.dispatchEvent ) {
-      var event = document.createEvent("Event");
-      event.initEvent(eventType, false, false);
-      window.dispatchEvent(event);
-    }
+  var dispatchCustomEvent = function(eventType) {
+    var event = document.createEvent("Event");
+    event.initEvent(eventType, false, false);
+    window.dispatchEvent(event);
   };
 
   // Assuming `window.orientation` is all about degrees
@@ -32,7 +27,7 @@
   var resizeDebounceInit;
   var resizeDebounceTimeout;
 
-  var resizeDebounce = function() {
+  window.addEventListener("resize", function() {
     if ( !resizeDebounceInit ) {
       dispatchCustomEvent(resizeStart);
       resizeDebounceInit = true;
@@ -54,13 +49,6 @@
         resizeDebounceInit = false;
       }, 100);
     }
-  };
-
-  if ( window.addEventListener ) {
-    window.addEventListener("resize", resizeDebounce, false);
-  }
-  else if ( window.attachEvent ) {
-    window.attachEvent("onresize", resizeDebounce);
-  }
+  }, false);
 
 })(window, document, "resizeend", "resizestart");

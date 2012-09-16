@@ -1,8 +1,8 @@
 # `resizeend.js`
 
-Best of both worlds: `window.onresize` and `window.onorientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
+Best of both worlds *slash events*: `resize` and `orientationchange`. [**See the demo.**](http://porada.github.com/resizeend/)
 
-The `window.onresizeend` callback is invoked in two cases:
+The `resizeend` event is dispatched in two cases:
 
 1. **When a browser window has finished resizing.**
 
@@ -10,7 +10,7 @@ The `window.onresizeend` callback is invoked in two cases:
 
 2. **When changing the device orientation has resized the viewport.**
 
-    Unless the shape of your screen is a square, switching from portrait mode into landscape (and vice versa) triggers `window.onresizeend`. If rotating a device upside down doesn’t alter its viewport dimensions, the callback isn’t invoked, because there’s simply no need to.
+    Unless the shape of your screen is a square, switching from portrait mode into landscape (and vice versa) triggers `resizeend`. If rotating a device upside down doesn’t alter its viewport dimensions, the event isn’t dispatched, because there’s simply no need to.
 
 Super useful in the [Responsive Web Design](http://en.wikipedia.org/wiki/Responsive_Web_Design) era we’re living and developing in.
 
@@ -19,75 +19,30 @@ Did I mention *it’s tiny*? [**Go through the source code.**](https://github.co
 ## Example usage
 
 ```javascript
-window.onresizeend = function() {
-  // callback
-};
-```
-
-If you don’t support IE 8 anymore, just use:
-
-```javascript
-window.addEventListener("resizeend", function() {
-  // callback
+window.addEventListener("resizeend", function(event) {
+  // Your callback, e.g.
+  console.log(event.type);
 }, false);
 ```
 
-### Multiple `resizeend` listeners
+### What about `resizestart`?
 
-Should you ever need multiple `resizeend` listeners that work in IE 8 and below:
-
-```javascript
-window.addResizeEndListener = function(callback) {
-  if ( this.addEventListener ) {
-    this.addEventListener("resizeend", callback, false);
-  }
-  else if ( typeof this.onresizeend === "function" ) {
-    var currentCallback = this.onresizeend;
-
-    this.onresizeend = function() {
-      currentCallback();
-      callback();
-    };
-  }
-  else {
-    this.onresizeend = callback;
-  }
-};
-
-window.addResizeEndListener(callback1);
-window.addResizeEndListener(callback2);
-//                                  …
-window.addResizeEndListener(callbackN);
-```
-
-## What about `resizestart`?
-
-`resizestart.js` supports both `window.onresizestart` **and** `window.onresizeend`. The `resizestart` callback is invoked when the viewport has just started resizing, and `resizeend` works as explained earlier. [**See the `resizestart` demo.**](http://porada.github.com/resizeend/resizestart.html)
+[`resizestart.js`](https://github.com/porada/resizeend/blob/master/resizstart.js) supports **both events: `resizestart` and `resizeend`.** `resizestart` is triggered when the viewport has just started resizing, and `resizeend` works as explained earlier. [**See the `resizestart` demo.**](http://porada.github.com/resizeend/resizestart.html)
 
 If the very resizing has any noticeable impact on performance, e.g. due to presence of many `box-shadow`s or alpha PNGs, I recommend using this technique:
 
 ```javascript
-window.onresizestart = function() {
+window.addEventListener("resizestart", function() {
   // Use the class name defined in your CSS
   element.className = "hidden";
-};
+}, false);
 
-window.onresizeend = function() {
+window.addEventListener("resizeend", function() {
   yourResizeEndCallback();
 
   // Remove the class this way or another
   element.className = "";
-};
-```
-
-Naturally, if you don’t support IE 8, use:
-
-```javascript
-window.addEventListener("resizestart", function() {
-  element.className = "hidden";
 }, false);
-
-// and so on…
 ```
 
 If you don’t need `resizestart` support, you should use `resizeend.js`.
@@ -100,8 +55,10 @@ Tested in the following browsers:
 * Chrome 20+
 * Firefox 14+
 * Opera 11+
-* Internet Explorer 7+
+* Internet Explorer 9+
 * Mobile Safari on iOS 5+
+
+**If you require support for IE 8 and below, [use the previous version](https://github.com/porada/resizeend/tree/ie8-support).**
 
 ## Feedback
 

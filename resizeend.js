@@ -6,17 +6,14 @@
 ;(function(window, document) {
   "use strict";
 
+  if ( !(window.addEventListener && document.createEvent && window.dispatchEvent) ) {
+    return;
+  }
+
   var dispatchResizeEndEvent = function() {
-    // If the `resizeend` callback is present, invoke it;
-    // otherwise, dispatch an actual event (if that’s possible)
-    if ( typeof window.onresizeend === "function" ) {
-      window.onresizeend();
-    }
-    else if ( document.createEvent && window.dispatchEvent ) {
-      var event = document.createEvent("Event");
-      event.initEvent("resizeend", false, false);
-      window.dispatchEvent(event);
-    }
+    var event = document.createEvent("Event");
+    event.initEvent("resizeend", false, false);
+    window.dispatchEvent(event);
   };
 
   // Assuming `window.orientation` is all about degrees
@@ -29,7 +26,7 @@
   var currentOrientation;
   var resizeDebounceTimeout;
 
-  var resizeDebounce = function() {
+  window.addEventListener("resize", function() {
     currentOrientation = getCurrentOrientation();
 
     // If `window` is resized due to an orientation change,
@@ -42,13 +39,6 @@
       clearTimeout(resizeDebounceTimeout);
       resizeDebounceTimeout = setTimeout(dispatchResizeEndEvent, 100);
     }
-  };
-
-  if ( window.addEventListener ) {
-    window.addEventListener("resize", resizeDebounce, false);
-  }
-  else if ( window.attachEvent ) {
-    window.attachEvent("onresize", resizeDebounce);
-  }
+  }, false);
 
 })(window, document);
