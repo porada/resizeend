@@ -25,28 +25,6 @@ window.addEventListener("resizeend", function(event) {
 }, false);
 ```
 
-### What about `resizestart`?
-
-[`resizestart.js`](https://github.com/porada/resizeend/blob/master/resizstart.js) supports **both events: `resizestart` and `resizeend`.** `resizestart` is triggered when the viewport has just started resizing, and `resizeend` works as explained earlier. [**See the `resizestart` demo.**](http://porada.github.com/resizeend/resizestart.html)
-
-If the very resizing has any noticeable impact on performance, e.g. due to presence of many `box-shadow`s or alpha PNGs, I recommend using this technique:
-
-```javascript
-window.addEventListener("resizestart", function() {
-  // Use the class name defined in your CSS
-  element.className = "hidden";
-}, false);
-
-window.addEventListener("resizeend", function() {
-  yourResizeEndCallback();
-
-  // Remove the class this way or another
-  element.className = "";
-}, false);
-```
-
-If you don’t need `resizestart` support, you should use `resizeend.js`.
-
 ## Browser support
 
 Tested in the following browsers:
