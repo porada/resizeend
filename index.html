@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>resizeend</title>
-    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="demo/demo.css">
   </head>
   <body>
     <div class="block header">
@@ -15,33 +15,6 @@
       <p class="start" id="resizeend"><code>resizeend</code> hasn’t been triggered yet…</p>
     </div>
     <script src="lib/resizeend.js"></script>
-    <script>
-
-/*  Demo
--------------------------------------------------------------------------------- */
-
-window.addEventListener("resizeend", callback, false);
-
-function callback(event) {
-  var log = document.getElementById(event.type);
-
-  if ( log && log.nodeType === 1 ) {
-    var entry, date = new Date();
-
-    entry  = "<code>" + event.type + "</code> was triggered ";
-    entry += "at&nbsp;<b>" + pad(date.getUTCHours()) + ":";
-    entry += pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds()) + ".";
-    entry += pad(Math.floor(date.getUTCMilliseconds() / 10)) + "</b>";
-
-    log.className = "";
-    log.innerHTML = entry;
-  }
-}
-
-function pad(number) {
-  return ( number < 10 ) ? "0" + number : "" + number;
-}
-
-    </script>
+    <script src="demo/demo.js"></script>
   </body>
 </html>
