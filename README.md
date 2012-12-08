@@ -1,4 +1,4 @@
-# `resizeend.js`
+# `resizeend`
 
 **Best of `resize` and `orientationchange` events. [See the demo.](http://porada.github.com/resizeend/)**
 
