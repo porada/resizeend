@@ -1,5 +1,5 @@
 #
-# resizeend.coffee © 2012 Dominik Porada · http://porada.mit-license.org
+# resizeend.coffee © 2012–2013 Dominik Porada · http://porada.mit-license.org
 # ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
 do (window, document) ->
@@ -11,8 +11,7 @@ do (window, document) ->
     unless event
       event = document.createEvent 'Event'
       event.initEvent 'resizeend', false, false
-
-    window.dispatchEvent event;
+    window.dispatchEvent event
 
   # Assuming `window.orientation` is all about degrees (or nothing),
   # the function expression returns either 0 or 90
