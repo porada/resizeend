@@ -1,4 +1,4 @@
-# `resizeend`
+# `resizeend` [![Build Status](https://travis-ci.org/porada/resizeend.png)](https://travis-ci.org/porada/resizeend)
 
 The blend of debounced `resize` event with `orientationchange` flavor. **[See the demo.](http://porada.github.com/resizeend/)**
 
