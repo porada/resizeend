@@ -12,7 +12,7 @@ execute = (command) ->
     throw error if error
 
 compile = ->
-  execute 'coffee --bare --compile --output lib/ src/resizeend.coffee'
+  execute 'coffee --bare --print src/ > lib/resizeend.js'
 
 minify = ->
   execute 'uglifyjs lib/resizeend.js --mangle --compress --output lib/resizeend.min.js'
