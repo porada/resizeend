@@ -7,9 +7,9 @@ do (window) ->
   return unless window.addEventListener and document.createEvent
 
   # Preparing for v2.0
-  events = ['resize:end', 'resizeend'].map (event) ->
+  events = ['resize:end', 'resizeend'].map (name) ->
     event = document.createEvent 'Event'
-    event.initEvent 'resizeend', false, false
+    event.initEvent name, false, false
     event
 
   dispatchResizeEndEvent = ->
