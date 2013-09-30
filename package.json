@@ -1,7 +1,7 @@
 {
   "name": "resizeend",
   "version": "1.1.2",
-  "main": "./lib/resizeend.js",
+  "main": "./dist/resizeend.js",
   "dependencies": {},
   "scripts": {
     "preinstall": "npm install -g coffee-script",
