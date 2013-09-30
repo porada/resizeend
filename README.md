@@ -27,12 +27,12 @@ Switching from portrait mode into landscape (and vice versa) triggers `resizeend
 
 Tested in the following browsers:
 
-* Safari 5.1+
+* Safari 6+
 * Chrome 20+
 * Firefox 14+
-* Opera 11+
+* Opera 12+
 * Internet Explorer 9+
-* Mobile Safari on iOS 5+
+* Mobile Safari on iOS 6+
 
 ## Feedback
 
