@@ -4,7 +4,7 @@
   "main": "./lib/resizeend.js",
   "dependencies": {},
   "scripts": {
-    "preinstall": "npm install -g coffee-script uglify-js",
+    "preinstall": "npm install -g coffee-script",
     "test": "cake compile"
   }
 }
