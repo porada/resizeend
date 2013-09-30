@@ -13,7 +13,7 @@ do (window) ->
     event
 
   dispatchResizeEndEvent = ->
-    events.forEach window.dispatchEvent
+    events.forEach window.dispatchEvent.bind(window)
 
   # Assuming `window.orientation` is all about degrees (or nothing),
   # the function expression returns either 0 or 90
