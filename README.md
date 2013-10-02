@@ -1,11 +1,11 @@
-# `resizeend` [![Build Status](https://travis-ci.org/porada/resizeend.png)](https://travis-ci.org/porada/resizeend)
+# `resize:end` [![Build Status](https://travis-ci.org/porada/resizeend.png)](https://travis-ci.org/porada/resizeend)
 
 The blend of debounced `resize` event with `orientationchange` flavor. **[See the demo.](http://porada.github.com/resizeend/)**
 
 ## Example usage
 
 ```javascript
-window.addEventListener('resizeend', function(event) {
+window.addEventListener('resize:end', function(event) {
   // Your callback, e.g.
   console.log(event.type);
 }, false);
@@ -13,7 +13,7 @@ window.addEventListener('resizeend', function(event) {
 
 ## How it works
 
-The `resizeend` event is dispatched in two cases:
+The `resize:end` (and `resizeend`) event is dispatched in two cases:
 
 #### Browser window has finished resizing
 
@@ -21,7 +21,7 @@ It’s the cure for those `window.onresize` skips that occur every pixel as long
 
 #### Changing device orientation resizes the viewport
 
-Switching from portrait mode into landscape (and vice versa) triggers `resizeend`. If rotating a device doesn’t alter its viewport dimensions (e.g. rotating it upside down), the event isn’t dispatched, because there’s simply no need to.
+Switching from portrait mode into landscape (and vice versa) triggers `resize:end`. If rotating a device doesn’t alter its viewport dimensions (e.g. rotating it upside down), the event isn’t dispatched, because there’s simply no need to.
 
 ## Browser support
 

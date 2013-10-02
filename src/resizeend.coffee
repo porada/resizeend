@@ -27,7 +27,7 @@ do (window) ->
     currentOrientation = getCurrentOrientation()
 
     # If `window` is resized due to an orientation change,
-    # dispatch `resizeend` immediately; otherwise, slightly delay it
+    # dispatch `resize:end` immediately; otherwise, slightly delay it
     unless currentOrientation is initialOrientation
       dispatchResizeEndEvent()
       initialOrientation = currentOrientation

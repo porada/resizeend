@@ -1,6 +1,10 @@
+
+/*  resize:end demo · http://porada.github.com/resizeend/
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••• */
+
 (function(window, document) {
 
-  window.addEventListener('resizeend', logTime, false);
+  window.addEventListener('resize:end', logTime, false);
 
   /**
    * Updates the message in the log.
