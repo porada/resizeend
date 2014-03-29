@@ -1,33 +1,40 @@
+/*! https://github.com/porada/resizeend · MIT */
+
 (function(window) {
-  var currentOrientation, debounce, dispatchResizeEndEvent, document, events, getCurrentOrientation, initialOrientation, resizeDebounceTimeout;
-  document = window.document;
-  if (!(window.addEventListener && document.createEvent)) {
-    return;
-  }
-  events = ['resize:end', 'resizeend'].map(function(name) {
-    var event;
+  var document = window.document;
+
+  var event;
+  var events = ['resize:end', 'resizeend'].map(function(name) {
     event = document.createEvent('Event');
     event.initEvent(name, false, false);
     return event;
   });
-  dispatchResizeEndEvent = function() {
-    return events.forEach(window.dispatchEvent.bind(window));
+
+  var dispatchResizeEndEvent = function() {
+    events.forEach(function(event) {
+      window.dispatchEvent(event);
+    });
   };
-  getCurrentOrientation = function() {
+
+  var getCurrentOrientation = function() {
     return Math.abs(+window.orientation || 0) % 180;
   };
-  initialOrientation = getCurrentOrientation();
-  currentOrientation = null;
-  resizeDebounceTimeout = null;
-  debounce = function() {
+
+  var initialOrientation = getCurrentOrientation();
+  var currentOrientation;
+  var resizeDebounceTimeout;
+
+  var debounce = function() {
     currentOrientation = getCurrentOrientation();
-    if (currentOrientation !== initialOrientation) {
+
+    if ( currentOrientation !== initialOrientation ) {
       dispatchResizeEndEvent();
-      return initialOrientation = currentOrientation;
+      initialOrientation = currentOrientation;
     } else {
       clearTimeout(resizeDebounceTimeout);
-      return resizeDebounceTimeout = setTimeout(dispatchResizeEndEvent, 100);
+      resizeDebounceTimeout = setTimeout(dispatchResizeEndEvent, 100);
     }
   };
-  return window.addEventListener('resize', debounce, false);
+
+  window.addEventListener('resize', debounce, false);
 })(window);
