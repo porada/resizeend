@@ -1,0 +1,13 @@
+{
+  "name": "resizeend",
+  "version": "1.2.1",
+  "main": "resizeend.js",
+  "author": "Dominik Porada",
+  "license": "MIT",
+  "homepage": "https://github.com/porada/resizeend",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/porada/resizeend.git"
+  },
+  "dependencies": {}
+}
