@@ -3,7 +3,7 @@ describe('resize:end', function() {
   var sandboxWindow;
 
   beforeEach(function(done) {
-    // A browser can’t be reliably resized using `window.resizeTo`,
+    // A browser can’t be resized reliably using `window.resizeTo`,
     // therefore creating a sandbox iframe that can be resized
     sandbox = document.createElement('iframe');
     sandbox.setAttribute('width', 1000);
@@ -37,13 +37,6 @@ describe('resize:end', function() {
 
   it('is triggered after the browser is resized', function(done) {
     sandboxWindow.addEventListener('resize:end', done, false);
-    setTimeout(function() {
-      sandbox.setAttribute('width', 500);
-    }, 0);
-  });
-
-  it('has an alias that’s triggered under the same conditions', function(done) {
-    sandboxWindow.addEventListener('resizeend', done, false);
     setTimeout(function() {
       sandbox.setAttribute('width', 500);
     }, 0);

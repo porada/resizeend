@@ -1,31 +1,31 @@
 /*! https://github.com/porada/resizeend · MIT */
 
-(function(window) {
-  var document = window.document;
+(function(window, document) {
+  'use strict';
 
-  var event;
-  var events = ['resize:end', 'resizeend'].map(function(name) {
-    event = document.createEvent('Event');
-    event.initEvent(name, false, false);
+  document = window.document;
+
+  function initEvent(eventName) {
+    var event = document.createEvent('Event');
+    event.initEvent(eventName, false, false);
     return event;
-  });
+  }
 
+  function getOrientation() {
+    return Math.abs(parseInt(window.orientation) || 0) % 180;
+  }
+
+  var resizeEndEvent = initEvent('resize:end');
   var dispatchResizeEndEvent = function() {
-    events.forEach(function(event) {
-      window.dispatchEvent(event);
-    });
+    window.dispatchEvent(resizeEndEvent);
   };
 
-  var getCurrentOrientation = function() {
-    return Math.abs(+window.orientation || 0) % 180;
-  };
-
-  var initialOrientation = getCurrentOrientation();
+  var initialOrientation = getOrientation();
   var currentOrientation;
   var resizeDebounceTimeout;
 
   var debounce = function() {
-    currentOrientation = getCurrentOrientation();
+    currentOrientation = getOrientation();
 
     if ( currentOrientation !== initialOrientation ) {
       dispatchResizeEndEvent();
