@@ -1,2 +1,8 @@
 language: node_js
 node_js: "0.10"
+script:
+  - ./node_modules/karma/bin/karma start ./test/config.ci.js
+env:
+  global:
+    - secure: "RkeCrPWxynC9lZOLeXMsUiyVnwzkOX1vtIh1oAlSwdeS4LfIWJdg64tEdXyh+RO3GMCFJcbiWxHtneM5k8A96XiapDkxnWGGLLiLPhaE6zUXfrVyF3uxdBk2v45Mt0Ex/ZS13GcQ4AYq9TZ8fygjkrG92pChMTiy7AZXpGWmeuA="
+    - secure: "ASTF8+bvUdXTos7P/F9YNxo5c6wTR/3UYfBwglIq0j6B1aAisZYUt9WCpzbmRxh2MnyFxRzPXl7X9cSeHsUPo00ANY0v42g94dg/tB7xlMyQHmCQ0gUvKj80wKHChvkCvyyZSVp04UPjt5Lh1rLrarI61TjdoooknYFTiCokUaE="

@@ -12,11 +12,4 @@ module.exports = function(config) {
     // Test output
     logLevel: config.LOG_WARN
   });
-
-  // When in CI environment, run the tests only in PhantomJS
-  if ( process.env.CI ) {
-    config.set({
-      browsers: ['PhantomJS']
-    });
-  }
 };
