@@ -7,7 +7,7 @@ describe('resize:end', function() {
       toApproximatelyEqual: function(util, customEqualityTesters) {
         return {
           compare: function(actual, expected) {
-            var actualRounded = Math.round(actual / 10) * 10;
+            var actualRounded = Math.round(actual / 100) * 100;
             return {
               pass: util.equals(actualRounded, expected, customEqualityTesters)
             };
@@ -56,17 +56,14 @@ describe('resize:end', function() {
   });
 
   it('is triggered within ~100ms after the browser has been resized', function(done) {
-    var value = 0;
     var resizeTime = null;
     var resizeEndTime = null;
 
     sandboxWindow.addEventListener('resize', function() {
-      value += 1;
       resizeTime = new Date();
     }, false);
 
     sandboxWindow.addEventListener('resize:end', function() {
-      value += 1;
       resizeEndTime = new Date();
     }, false);
 
@@ -75,7 +72,8 @@ describe('resize:end', function() {
     }, 0);
 
     setTimeout(function() {
-      expect(value).toEqual(2);
+      expect(resizeTime).not.toBe(null);
+      expect(resizeEndTime).not.toBe(null);
       expect(resizeEndTime - resizeTime).toApproximatelyEqual(100);
       done();
     }, 500);
