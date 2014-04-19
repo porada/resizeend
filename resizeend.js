@@ -1,13 +1,18 @@
 /*! https://github.com/porada/resizeend · MIT */
 
-(function(window, document) {
+;(function() {
   'use strict';
 
-  document = window.document;
+  function createEvent(type) {
+    var event;
 
-  function initEvent(eventName) {
-    var event = document.createEvent('Event');
-    event.initEvent(eventName, false, false);
+    try {
+      event = new Event(type);
+    } catch(exception) {
+      event = document.createEvent('Event');
+      event.initEvent(type, false, false);
+    }
+
     return event;
   }
 
@@ -37,10 +42,11 @@
     };
   }
 
-  var resizeEndEvent = initEvent('resize:end');
+  var resizeEndEvent = createEvent('resize:end');
   var handleResizeEvent = debounce(function(event) {
     event.target.dispatchEvent(resizeEndEvent);
   }, 100);
 
-  window.addEventListener('resize', handleResizeEvent, false);
-})(window);
+  addEventListener('resize', handleResizeEvent, false);
+
+})();
