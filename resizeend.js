@@ -11,30 +11,33 @@
     return event;
   }
 
-  function getOrientation() {
-    return Math.abs(parseInt(window.orientation) || 0) % 180;
+  function debounce(callback, delay) {
+    var timeout;
+    var timestamp;
+
+    return function() {
+      timestamp = new Date();
+      var delayed = function() {
+        var last = (new Date()) - timestamp;
+
+        if ( last < delay ) {
+          timeout = setTimeout(delayed, delay - last);
+        } else {
+          timeout = null;
+          callback();
+        }
+      };
+
+      if ( !timeout ) {
+        timeout = setTimeout(delayed, delay);
+      }
+    };
   }
 
   var resizeEndEvent = initEvent('resize:end');
-  var dispatchResizeEndEvent = function() {
+  var handleResizeEvent = debounce(function() {
     window.dispatchEvent(resizeEndEvent);
-  };
+  }, 100);
 
-  var initialOrientation = getOrientation();
-  var currentOrientation;
-  var resizeDebounceTimeout;
-
-  var debounce = function() {
-    currentOrientation = getOrientation();
-
-    if ( currentOrientation !== initialOrientation ) {
-      dispatchResizeEndEvent();
-      initialOrientation = currentOrientation;
-    } else {
-      clearTimeout(resizeDebounceTimeout);
-      resizeDebounceTimeout = setTimeout(dispatchResizeEndEvent, 100);
-    }
-  };
-
-  window.addEventListener('resize', debounce, false);
+  window.addEventListener('resize', handleResizeEvent, false);
 })(window);
