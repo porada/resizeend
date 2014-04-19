@@ -12,11 +12,14 @@
   }
 
   function debounce(callback, delay) {
-    var timeout;
-    var timestamp;
+    var callbackContext, callbackArguments;
+    var timeout, timestamp;
 
     return function() {
+      callbackContext = this;
+      callbackArguments = [].slice.call(arguments, 0);
       timestamp = new Date();
+
       var delayed = function() {
         var last = (new Date()) - timestamp;
 
@@ -24,7 +27,7 @@
           timeout = setTimeout(delayed, delay - last);
         } else {
           timeout = null;
-          callback();
+          callback.apply(callbackContext, callbackArguments);
         }
       };
 
@@ -35,8 +38,8 @@
   }
 
   var resizeEndEvent = initEvent('resize:end');
-  var handleResizeEvent = debounce(function() {
-    window.dispatchEvent(resizeEndEvent);
+  var handleResizeEvent = debounce(function(event) {
+    event.target.dispatchEvent(resizeEndEvent);
   }, 100);
 
   window.addEventListener('resize', handleResizeEvent, false);
