@@ -1,6 +1,9 @@
 {
   "name": "resizeend",
-  "main": "resizeend.js",
+  "repo": "porada/resizeend",
+  "scripts": [
+    "resizeend.js"
+  ],
   "author": "Dominik Porada",
   "license": "MIT"
 }

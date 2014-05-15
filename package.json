@@ -2,22 +2,18 @@
   "name": "resizeend",
   "version": "1.2.1",
   "main": "resizeend.js",
-  "author": "Dominik Porada",
-  "license": "MIT",
   "homepage": "https://github.com/porada/resizeend",
   "repository": {
     "type": "git",
     "url": "git://github.com/porada/resizeend.git"
   },
-  "bugs": {
-    "url": "https://github.com/porada/resizeend/issues"
-  },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start ./test/config.js",
-    "lint": "./node_modules/jshint/bin/jshint .{,/test/}/*.js"
+    "lint": "./node_modules/jshint/bin/jshint .{,/test/}/*.js",
+    "component:validate": "./node_modules/.bin/component validate"
   },
-  "dependencies": {},
   "devDependencies": {
+    "component": "~1.0.0-rc5",
     "karma": "~0.12.1",
     "karma-jasmine": "~0.2.2",
     "karma-phantomjs-launcher": "~0.1.2",
@@ -26,5 +22,7 @@
     "karma-safari-launcher": "~0.1.1",
     "karma-sauce-launcher": "~0.2.7",
     "jshint": "~2.5.0"
-  }
+  },
+  "author": "Dominik Porada",
+  "license": "MIT"
 }
