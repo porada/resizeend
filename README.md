@@ -36,7 +36,7 @@ Tested in the following browsers:
 
 ## Feedback
 
-Any suggestions are [welcome](https://github.com/porada/resizeend/issues). You can also shout to me on Twitter: I’m **[@porada](http://twitter.com/porada)**.
+Any suggestions are [welcome](https://github.com/porada/resizeend/issues). You can also find me on Twitter: I’m **[@porada](http://twitter.com/porada)**.
 
 ## License
 
